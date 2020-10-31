@@ -1,0 +1,249 @@
+library(SNFtool)
+library(cluster)
+setwd('~/SNF')
+source('getAffyMat.R')
+
+######################  Breast #######################################################
+K = 15;##number of neighbors, usually (10~30)
+alpha = 0.4; ##hyperparameter, usually (0.3~0.8)
+T = 20; ###Number of Iterations, usually (10~20)
+
+GFLasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Breast/Beta-GFLasso-Breast.csv",header = TRUE)
+Lasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Breast/Beta-Lasso-Breast.csv",header = TRUE)
+SGL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Breast/Beta-SGL-Breast.csv",header = TRUE)
+SIOL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Breast/Beta-SIOL-Breast - 0.1.csv",header = TRUE)
+methylation.names <- GFLasso[,1]
+GFLasso <- GFLasso[,-1]
+Lasso <- Lasso[,-1]
+SGL <- SGL[,-1]
+SIOL <- SIOL[,-1]
+
+input <- list( GFLasso, Lasso, SGL,SIOL )
+names( input ) <- c( "GFLasso", "Lasso", "SGL", "SIOL")
+distMatrix <- list()
+WS <- list()
+  
+ for( name in names(input) ) {
+     X <- as.matrix(input[[name]])
+     SX <- standardNormalization( X ) # this function is to normalize data, not to normalize distance
+     distMatrix[[name]] <- dist2( SX, SX )
+     D <- distMatrix[[name]]
+     WS[[name]] <- getAffyMat(D, K, alpha)
+ }
+ 
+ for( name in names(input) ) 
+ {
+   path <- paste("C:/Users/vrrani/Documents/SNF/Affinity/Breast/",name,"-Affinity.csv")   
+   write.table(WS[[name]],file = path, sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")   
+  
+   
+
+ }
+
+  W <- SNF( WS, K, T )
+ write.table(W, "C:/Users/vrrani/Documents/SNF/Affinity/Breast/FusedNetwork.csv", sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")
+
+
+######################  Colon #######################################################
+K = 9;##number of neighbors, usually (10~30)
+alpha = 0.5; ##hyperparameter, usually (0.3~0.8)
+T = 20; ###Number of Iterations, usually (10~20)
+
+GFLasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Colon/Beta-GFLasso-Colon.csv",header = TRUE)
+Lasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Colon/Beta-Lasso-Colon.csv",header = TRUE)
+SGL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Colon/Beta-SGL-Colon.csv",header = TRUE)
+SIOL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Colon/Beta-SIOL-Colon - 0.1.csv",header = TRUE)
+methylation.names <- GFLasso[,1]
+GFLasso <- GFLasso[,-1]
+Lasso <- Lasso[,-1]
+SGL <- SGL[,-1]
+SIOL <- SIOL[,-1]
+
+input <- list( GFLasso, Lasso, SGL,SIOL )
+names( input ) <- c( "GFLasso", "Lasso", "SGL", "SIOL")
+distMatrix <- list()
+WS <- list()
+  
+ for( name in names(input) ) {
+     X <- as.matrix(input[[name]])
+     SX <- standardNormalization( X ) # this function is to normalize data, not to normalize distance
+     distMatrix[[name]] <- dist2( SX, SX )
+     D <- distMatrix[[name]]
+     WS[[name]] <- getAffyMat(D, K, alpha)
+ }
+ 
+ for( name in names(input) ) 
+ {
+   path <- paste("C:/Users/vrrani/Documents/SNF/Affinity/Colon/",name,"-Affinity.csv")   
+   write.table(WS[[name]],file = path, sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")   
+  
+   
+
+ }
+
+  W <- SNF( WS, K, T )
+ write.table(W, "C:/Users/vrrani/Documents/SNF/Affinity/Colon/FusedNetwork.csv", sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")
+
+######################  GBM  #######################################################
+K = 11;##number of neighbors, usually (10~30)
+alpha = 0.5; ##hyperparameter, usually (0.3~0.8)
+T = 20; ###Number of Iterations, usually (10~20)
+
+GFLasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/GBM/Beta-GFLasso-GBM.csv",header = TRUE)
+Lasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/GBM/Beta-Lasso-GBM.csv",header = TRUE)
+SGL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/GBM/Beta-SGL-GBM.csv",header = TRUE)
+SIOL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/GBM/Beta-SIOL-GBM - 0.1.csv",header = TRUE)
+methylation.names <- GFLasso[,1]
+GFLasso <- GFLasso[,-1]
+Lasso <- Lasso[,-1]
+SGL <- SGL[,-1]
+SIOL <- SIOL[,-1]
+
+input <- list( GFLasso, Lasso, SGL,SIOL )
+names( input ) <- c( "GFLasso", "Lasso", "SGL", "SIOL")
+distMatrix <- list()
+WS <- list()
+  
+ for( name in names(input) ) {
+     X <- as.matrix(input[[name]])
+     SX <- standardNormalization( X ) # this function is to normalize data, not to normalize distance
+     distMatrix[[name]] <- dist2( SX, SX )
+     D <- distMatrix[[name]]
+     WS[[name]] <- getAffyMat(D, K, alpha)
+ }
+ 
+ for( name in names(input) ) 
+ {
+   path <- paste("C:/Users/vrrani/Documents/SNF/Affinity/GBM/",name,"-Affinity.csv")   
+   write.table(WS[[name]],file = path, sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")   
+  
+   
+
+ }
+
+  W <- SNF( WS, K, T )
+ write.table(W, "C:/Users/vrrani/Documents/SNF/Affinity/GBM/FusedNetwork.csv", sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")
+
+######################  Lung  #######################################################
+K = 20;##number of neighbors, usually (10~30)
+alpha = 0.6; ##hyperparameter, usually (0.3~0.8)
+T = 20; ###Number of Iterations, usually (10~20)
+
+GFLasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Lung/Beta-GFLasso-Lung.csv",header = TRUE)
+Lasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Lung/Beta-Lasso-Lung.csv",header = TRUE)
+SGL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Lung/Beta-SGL-Lung.csv",header = TRUE)
+SIOL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Lung/Beta-SIOL-Lung - 0.1.csv",header = TRUE)
+methylation.names <- GFLasso[,1]
+GFLasso <- GFLasso[,-1]
+Lasso <- Lasso[,-1]
+SGL <- SGL[,-1]
+SIOL <- SIOL[,-1]
+
+input <- list( GFLasso, Lasso, SGL,SIOL )
+names( input ) <- c( "GFLasso", "Lasso", "SGL", "SIOL")
+distMatrix <- list()
+WS <- list()
+  
+ for( name in names(input) ) {
+     X <- as.matrix(input[[name]])
+     SX <- standardNormalization( X ) # this function is to normalize data, not to normalize distance
+     distMatrix[[name]] <- dist2( SX, SX )
+     D <- distMatrix[[name]]
+     WS[[name]] <- getAffyMat(D, K, alpha)
+ }
+ 
+ for( name in names(input) ) 
+ {
+   path <- paste("C:/Users/vrrani/Documents/SNF/Affinity/Lung/",name,"-Affinity.csv")   
+   write.table(WS[[name]],file = path, sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")   
+  
+   
+
+ }
+
+  W <- SNF( WS, K, T )
+ write.table(W, "C:/Users/vrrani/Documents/SNF/Affinity/Lung/FusedNetwork.csv", sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")
+
+######################  Kidney  #######################################################
+K = 10;##number of neighbors, usually (10~30)
+alpha = 0.5; ##hyperparameter, usually (0.3~0.8)
+T = 20; ###Number of Iterations, usually (10~20)
+
+GFLasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Kidney/Beta-GFLasso-Kidney.csv",header = TRUE)
+Lasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Kidney/Beta-Lasso-Kidney.csv",header = TRUE)
+SGL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Kidney/Beta-SGL-Kidney.csv",header = TRUE)
+SIOL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/Kidney/Beta-SIOL-Kidney - 0.1.csv",header = TRUE)
+methylation.names <- GFLasso[,1]
+GFLasso <- GFLasso[,-1]
+Lasso <- Lasso[,-1]
+SGL <- SGL[,-1]
+SIOL <- SIOL[,-1]
+
+input <- list( GFLasso, Lasso, SGL,SIOL )
+names( input ) <- c( "GFLasso", "Lasso", "SGL", "SIOL")
+distMatrix <- list()
+WS <- list()
+  
+ for( name in names(input) ) {
+     X <- as.matrix(input[[name]])
+     SX <- standardNormalization( X ) # this function is to normalize data, not to normalize distance
+     distMatrix[[name]] <- dist2( SX, SX )
+     D <- distMatrix[[name]]
+     WS[[name]] <- getAffyMat(D, K, alpha)
+ }
+ 
+ for( name in names(input) ) 
+ {
+   path <- paste("C:/Users/vrrani/Documents/SNF/Affinity/Kidney/",name,"-Affinity.csv")   
+   write.table(WS[[name]],file = path, sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")   
+  
+   
+
+ }
+
+  W <- SNF( WS, K, T )
+ write.table(W, "C:/Users/vrrani/Documents/SNF/Affinity/Kidney/FusedNetwork.csv", sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")
+
+#########################################  Ovarian ##############################################
+
+K = 20;##number of neighbors, usually (10~30)
+alpha = 0.8; ##hyperparameter, usually (0.3~0.8)
+T = 20; ###Number of Iterations, usually (10~20)
+
+
+
+GFLasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/OvarianFiltered/Beta-GFLasso-OvarianFiltered.csv",header = TRUE)
+Lasso <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/OvarianFiltered/Beta-Lasso-OvarianFiltered.csv",header = TRUE)
+SGL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/OvarianFiltered/Beta-SGL-OvarianFiltered.csv",header = TRUE)
+SIOL <- read.csv("D:/Research/BK21/BarPlot & VennDiagram/BetaFiles/OvarianFiltered/Beta-SIOL-OvarianFiltered - 0.1.csv",header = TRUE)
+methylation.names <- GFLasso[,1]
+GFLasso <- GFLasso[,-1]
+Lasso <- Lasso[,-1]
+SGL <- SGL[,-1]
+SIOL <- SIOL[,-1]
+
+input <- list( GFLasso, Lasso, SGL,SIOL )
+names( input ) <- c( "GFLasso", "Lasso", "SGL", "SIOL")
+distMatrix <- list()
+WS <- list()
+  
+ for( name in names(input) ) {
+     X <- as.matrix(input[[name]])
+     SX <- standardNormalization( X ) # this function is to normalize data, not to normalize distance
+     distMatrix[[name]] <- dist2( SX, SX )
+     D <- distMatrix[[name]]
+     WS[[name]] <- getAffyMat(D, K, alpha)
+ }
+ 
+ for( name in names(input) ) 
+ {
+   path <- paste("C:/Users/vrrani/Documents/SNF/Affinity/Ovarian/",name,"-Affinity.csv")   
+   write.table(WS[[name]],file = path, sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")   
+  
+   
+
+ }
+
+  W <- SNF( WS, K, T )
+ write.table(W, "C:/Users/vrrani/Documents/SNF/Affinity/Ovarian/FusedNetwork.csv", sep=",",row.names=methylation.names,col.names= methylation.names,qmethod = "double")
+
