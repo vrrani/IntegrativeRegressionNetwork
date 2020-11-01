@@ -1,10 +1,10 @@
 library('VennDiagram')
 
-GFLasso <-  read.csv("C:/Users/vrrani/Documents/SNF/AllSimilarities/Ovarian/GFLasso.csv",header = TRUE)
-Lasso <-  read.csv("C:/Users/vrrani/Documents/SNF/AllSimilarities/Ovarian/Lasso.csv",header = TRUE)
-SGL <-  read.csv("C:/Users/vrrani/Documents/SNF/AllSimilarities/Ovarian/SGL.csv",header = TRUE)
-SIOL <-  read.csv("C:/Users/vrrani/Documents/SNF/AllSimilarities/Ovarian/SIOL.csv",header = TRUE)
-Fused <-  read.csv("C:/Users/vrrani/Documents/SNF/AllSimilarities/Ovarian/Fused.csv",header = TRUE)
+GFLasso <-  read.csv("~/AllSimilarities/Ovarian/GFLasso.csv",header = TRUE)
+Lasso <-  read.csv("~/AllSimilarities/Ovarian/Lasso.csv",header = TRUE)
+SGL <-  read.csv("~/AllSimilarities/Ovarian/SGL.csv",header = TRUE)
+SIOL <-  read.csv("~/AllSimilarities/Ovarian/SIOL.csv",header = TRUE)
+Fused <-  read.csv("~/AllSimilarities/Ovarian/Fused.csv",header = TRUE)
 
 
 
