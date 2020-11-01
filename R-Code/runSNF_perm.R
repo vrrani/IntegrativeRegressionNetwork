@@ -6,10 +6,10 @@ setwd('~/SNF')
 source('SimSilhouette.R')
 source('getAffyMat.R')
 
-GFLasso <- read.csv("C:/Users/USER/Documents/Research/BK21/BarPlot & VennDiagram/BetaFiles/Breast/Beta-GFLasso-Breast.csv",header = TRUE)
-Lasso <- read.csv("C:/Users/USER/Documents/Research/BK21/BarPlot & VennDiagram/BetaFiles/Breast/Beta-Lasso-Breast.csv",header = TRUE)
-SGL <- read.csv("C:/Users/USER/Documents/Research/BK21/BarPlot & VennDiagram/BetaFiles/Breast/Beta-SGL-Breast.csv",header = TRUE)
-SIOL <- read.csv("C:/Users/USER/Documents/Research/BK21/BarPlot & VennDiagram/BetaFiles/Breast/Beta-SIOL-Breast - 0.1.csv",header = TRUE)
+GFLasso <- read.csv("~/Breast/Beta-GFLasso-Breast.csv",header = TRUE)
+Lasso <- read.csv("~/Breast/Beta-Lasso-Breast.csv",header = TRUE)
+SGL <- read.csv("~/Breast/Beta-SGL-Breast.csv",header = TRUE)
+SIOL <- read.csv("~/Breast/Beta-SIOL-Breast - 0.1.csv",header = TRUE)
 
 GFLasso <- GFLasso[,-1]
 Lasso <- Lasso[,-1]
